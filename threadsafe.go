@@ -204,16 +204,20 @@ func (set *threadSafeSet) ToSlice() []interface{} {
 }
 
 func (set *threadSafeSet) ToUint64Slice() []uint64 {
+	set.RLock()
 	keys := make([]uint64, 0, set.Cardinality())
-	for elem := range *set {
+	for elem := range *set.s {
 		keys = append(keys, elem.(uint64))
 	}
+	set.RUnlock()
 	return keys
 }
 func (set *threadSafeSet) ToStringSlice() []string {
+	set.RLock()
 	keys := make([]string, 0, set.Cardinality())
-	for elem := range *set {
+	for elem := range *set.s {
 		keys = append(keys, elem.(string))
 	}
+	set.RUnlock()
 	return keys
 }
