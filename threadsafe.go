@@ -202,3 +202,18 @@ func (set *threadSafeSet) ToSlice() []interface{} {
 	set.RUnlock()
 	return keys
 }
+
+func (set *threadSafeSet) ToUint64Slice() []uint64 {
+	keys := make([]uint64, 0, set.Cardinality())
+	for elem := range *set {
+		keys = append(keys, elem.(uint64))
+	}
+	return keys
+}
+func (set *threadSafeSet) ToStringSlice() []string {
+	keys := make([]string, 0, set.Cardinality())
+	for elem := range *set {
+		keys = append(keys, elem.(string))
+	}
+	return keys
+}

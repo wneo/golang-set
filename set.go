@@ -137,6 +137,9 @@ type Set interface {
 
 	// Returns the members of the set as a slice.
 	ToSlice() []interface{}
+
+	ToUint64Slice() []uint64
+	ToStringSlice() []string
 }
 
 // Creates and returns a reference to an empty set.
